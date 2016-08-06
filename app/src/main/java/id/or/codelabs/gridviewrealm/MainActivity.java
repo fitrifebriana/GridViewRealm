@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnAdd;
     Realm realm;
-    ArrayList<String> names;
+    ArrayList<String> names = new ArrayList<>();
     ArrayAdapter adapter;
     EditText txtName;
     GridView gvMain;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gvMain = (GridView)findViewById(R.id.gv_main);
+        gvMain = (GridView) findViewById(R.id.gv_main);
 
         //Setup
         RealmConfiguration config = new RealmConfiguration.Builder(this).build();
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnAdd = (Button)findViewById(R.id.btn_add);
+        btnAdd = (Button) findViewById(R.id.btn_add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertAddNewName() {
-        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View addNameForm = inflater.inflate(R.layout.input_dialog, null, false);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View addNameForm = inflater.inflate(R.layout.input_dialog, null, false);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setView(addNameForm);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                txtName = (EditText)findViewById(R.id.txt_name);
+                txtName = (EditText) addNameForm.findViewById(R.id.txt_name);
                 String name = txtName.getText().toString().trim();
                 Name n = new Name();
 
